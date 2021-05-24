@@ -164,6 +164,9 @@ const myHandler = (function(){
             remoteVideo.srcObject = stream;
             remoteVideo.playsInline = true;
             await remoteVideo.play().catch(console.error);
+            
+            // closeボタンを活性化
+            closeTrigger.removeAttribute("disabled");
         });
 
         // closeしたとき
