@@ -159,7 +159,7 @@ const myHandler = (function(){
 
         // answerされた時
         mediaConnection.on('stream', async stream => {
-            messages.textContent += `with ${dataConnection.remoteId}: MediaConnection has been opened\n`;
+            messages.textContent += `with ${mediaConnection.remoteId}: MediaConnection has been opened\n`;
             // Render remote stream for caller
             remoteVideo.srcObject = stream;
             remoteVideo.playsInline = true;
@@ -170,6 +170,11 @@ const myHandler = (function(){
         mediaConnection.once('close', () => {
             remoteVideo.srcObject.getTracks().forEach(track => track.stop());
             remoteVideo.srcObject = null;
+
+            // connectボタンのdisabled属性を削除
+            callTrigger.removeAttribute("disabled");
+            // closeボタンを非活性化
+            closeTrigger.setAttribute("disabled", true);
         });
 
         // closeボタンのイベントリスナを登録
